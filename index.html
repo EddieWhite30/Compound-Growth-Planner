@@ -13,21 +13,6 @@ body{margin:0;background:var(--bg);color:var(--text);font:16px/1.45 -apple-syste
 main{max-width:640px;margin:0 auto;padding:20px 16px 40px}
 h1{font-size:22px;margin:0 0 4px}
 p.sub{color:var(--muted);margin:0 0 16px;font-size:14px}
-.card{background:var(--card);border:1px solid var(--line);border-rad<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Compound Growth Planner</title>
-<style>
-:root{--bg:#f7f7f5;--card:#fff;--text:#1d1d1b;--muted:#6b6b66;--line:#e3e3de;--accent:#2563eb;--ok:#16794a;--okbg:#e3f4ea;--mid:#8a5a00;--midbg:#fdf0d5;--hard:#b3261e;--hardbg:#fbe4e2;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151514;--card:#201f1e;--text:#ecece8;--muted:#a1a19a;--line:#33322f;--accent:#6ea0ff;--ok:#6fd39c;--okbg:#17301f;--mid:#f0c35c;--midbg:#352a0e;--hard:#ff8d84;--hardbg:#3a1a18;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#151514;--card:#201f1e;--text:#ecece8;--muted:#a1a19a;--line:#33322f;--accent:#6ea0ff;--ok:#6fd39c;--okbg:#17301f;--mid:#f0c35c;--midbg:#352a0e;--hard:#ff8d84;--hardbg:#3a1a18;color-scheme:dark}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);color:var(--text);font:16px/1.45 -apple-system,system-ui,"Segoe UI",Roboto,sans-serif}
-main{max-width:640px;margin:0 auto;padding:20px 16px 40px}
-h1{font-size:22px;margin:0 0 4px}
-p.sub{color:var(--muted);margin:0 0 16px;font-size:14px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:14px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .full{grid-column:1/-1}
@@ -62,9 +47,9 @@ summary{cursor:pointer;font-weight:600}
 <p class="sub">Daily % needed to reach a target balance over a set number of weeks.</p>
 
 <div class="card"><div class="grid">
-<div><label for="start">Starting balance ($)</label><input id="start" type="number" inputmode="decimal" step="0.01" value="367.19"></div>
-<div><label for="target">Target balance ($)</label><input id="target" type="number" inputmode="decimal" step="0.01" value="967"></div>
-<div><label for="dpw">Trading days per week</label><input id="dpw" type="number" inputmode="numeric" min="1" max="7" value="3"></div>
+<div><label for="start">Starting balance ($)</label><input id="start" type="number" inputmode="decimal" step="0.01" value="0"></div>
+<div><label for="target">Target balance ($)</label><input id="target" type="number" inputmode="decimal" step="0.01" value="0"></div>
+<div><label for="dpw">Trading days per week</label><input id="dpw" type="number" inputmode="numeric" min="1" max="7" value="0"></div>
 <div><label for="custom">Custom weeks (optional)</label><input id="custom" type="number" inputmode="numeric" min="1" placeholder="e.g. 10"></div>
 </div></div>
 
@@ -224,173 +209,6 @@ $('clist').onclick=e=>{
   custom.splice(+b.dataset.i,1);saveCustom();buildSelect();render();
 };
 buildSelect();$('fsel').value='MGC';render();renderW();
-</script>
-</main>
-</body>
-</html>
-ius:14px;padding:14px;margin-bottom:14px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.full{grid-column:1/-1}
-label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}
-input,select{width:100%;box-sizing:border-box;font:inherit;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--text)}
-input:focus,select:focus,button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
-.sum{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:14px}
-.sum b{font-size:18px;display:block}
-.tabs{display:flex;gap:8px;margin-bottom:14px}
-.tab{flex:1;padding:10px;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:10px;font:inherit;font-weight:600;cursor:pointer}
-.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-.tw{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
-th,td{padding:9px 6px;text-align:right;border-bottom:1px solid var(--line);font-size:14px;white-space:nowrap}
-th:first-child,td:first-child{text-align:left}
-th{color:var(--muted);font-weight:600;font-size:12px}
-.pill{display:inline-block;padding:2px 8px;border-radius:99px;font-weight:600}
-.ok{background:var(--okbg);color:var(--ok)}.mid{background:var(--midbg);color:var(--mid)}.hard{background:var(--hardbg);color:var(--hard)}
-.note{font-size:12px;color:var(--muted)}
-.info{font-size:14px;margin:10px 0 0}
-summary{cursor:pointer;font-weight:600}
-.btn{padding:10px 14px;border:0;border-radius:10px;background:var(--accent);color:var(--bg);font:inherit;font-weight:600;cursor:pointer}
-.x{background:none;border:0;color:var(--hard);font-size:16px;cursor:pointer;padding:4px 8px}
-.cl{display:flex;justify-content:space-between;align-items:center;font-size:14px;padding:4px 0}
-[hidden]{display:none!important}
-</style>
-</head>
-<body>
-<main>
-<h1>Compound Growth Planner</h1>
-<p class="sub">Daily % needed to reach a target balance over a set number of weeks.</p>
-
-<div class="card"><div class="grid">
-<div><label for="start">Starting balance ($)</label><input id="start" type="number" inputmode="decimal" step="0.01" value="0"></div>
-<div><label for="target">Target balance ($)</label><input id="target" type="number" inputmode="decimal" step="0.01" value="0"></div>
-<div><label for="dpw">Trading days per week</label><input id="dpw" type="number" inputmode="numeric" min="1" max="7" value="0"></div>
-<div><label for="custom">Custom weeks (optional)</label><input id="custom" type="number" inputmode="numeric" min="1" placeholder="e.g. 10"></div>
-</div></div>
-
-<div class="card sum" id="sum"></div>
-
-<div class="tabs" role="tablist">
-<button class="tab" role="tab" id="t1" aria-selected="true" aria-controls="p1">Options / General</button>
-<button class="tab" role="tab" id="t2" aria-selected="false" aria-controls="p2">Futures</button>
-</div>
-
-<section id="p1" role="tabpanel">
-<div class="card">
-<div class="tw"><table>
-<thead><tr><th>Weeks</th><th>Days</th><th>Daily %</th><th>Day 1</th><th>Last day</th><th>Weekly %</th></tr></thead>
-<tbody id="rows1"></tbody></table></div>
-<p class="note">Compound: (target ÷ start)^(1 ÷ trading days) − 1. Day 1 and Last day show the dollar gain needed on your first and final trading day. Assumes every trading day is a winner and ignores fees and taxes. Green is under 1% a day, amber 1–2.5%, red above 2.5%.</p>
-</div>
-</section>
-
-<section id="p2" role="tabpanel" hidden>
-<div class="card">
-<div class="grid">
-<div class="full"><label for="fsel">Futures contract</label><select id="fsel"></select></div>
-<div class="full"><label for="fn">Contracts traded</label><input id="fn" type="number" inputmode="numeric" min="1" value="1"></div>
-
-</div>
-<p class="info" id="finfo"></p>
-<div class="tw" style="margin-top:10px"><table>
-<thead><tr><th>Weeks</th><th>Days</th><th>Daily %</th><th>Day 1</th><th>Last day</th></tr></thead>
-<tbody id="rows2"></tbody></table></div>
-<p class="note">Day 1 and Last day show the dollars needed that day, with ticks per contract underneath (dollars ÷ contracts ÷ tick value). Tick values are standard CME contract specs; confirm on cmegroup.com before trading, since specs can change.</p>
-</div>
-<details class="card">
-<summary>Add a contract to the list</summary>
-<div class="grid" style="margin-top:10px">
-<div><label for="csym">Ticker</label><input id="csym" placeholder="e.g. MNQ"></div>
-<div><label for="ctv">Tick value ($)</label><input id="ctv" type="number" inputmode="decimal" step="any" placeholder="e.g. 0.50"></div>
-<div class="full"><label for="cname">Name</label><input id="cname" placeholder="e.g. Micro E-mini Nasdaq-100"></div>
-<div class="full"><button class="btn" id="cadd">Add contract</button> <span class="note" id="cmsg"></span></div>
-</div>
-<div id="clist" style="margin-top:8px"></div>
-<p class="note">Added contracts are saved in this browser only. When CME lists a new contract, add it here, or ask Claude to update the built-in list.</p>
-</details>
-</section>
-
-<script>
-const $=id=>document.getElementById(id);
-const WEEKS=[2,4,6,8,10,12,16,20,24,30,36,52];
-// [ticker, name, tick value $, tick size, category]
-const BASE=[
-['ES','E-mini S&P 500',12.5,'0.25 pt','Equity index'],['MES','Micro E-mini S&P 500',1.25,'0.25 pt','Equity index'],
-['NQ','E-mini Nasdaq-100',5,'0.25 pt','Equity index'],['MNQ','Micro E-mini Nasdaq-100',0.5,'0.25 pt','Equity index'],
-['YM','E-mini Dow',5,'1 pt','Equity index'],['MYM','Micro E-mini Dow',0.5,'1 pt','Equity index'],
-['RTY','E-mini Russell 2000',5,'0.10 pt','Equity index'],['M2K','Micro E-mini Russell 2000',0.5,'0.10 pt','Equity index'],
-['GC','Gold',10,'0.10','Metals'],['MGC','Micro Gold',1,'0.10','Metals'],
-['SI','Silver',25,'0.005','Metals'],['SIL','Micro Silver',5,'0.005','Metals'],
-['HG','Copper',12.5,'0.0005','Metals'],['MHG','Micro Copper',1.25,'0.0005','Metals'],['PL','Platinum',5,'0.10','Metals'],
-['CL','Crude Oil',10,'0.01','Energy'],['MCL','Micro Crude Oil',1,'0.01','Energy'],['NG','Natural Gas',10,'0.001','Energy'],
-['RB','RBOB Gasoline',4.2,'0.0001','Energy'],['HO','Heating Oil',4.2,'0.0001','Energy'],
-['ZT','2-Year T-Note',7.8125,'1/256 pt','Interest rates'],['ZF','5-Year T-Note',7.8125,'1/128 pt','Interest rates'],
-['ZN','10-Year T-Note',15.625,'1/64 pt','Interest rates'],['TN','Ultra 10-Year T-Note',15.625,'1/64 pt','Interest rates'],
-['ZB','30-Year T-Bond',31.25,'1/32 pt','Interest rates'],['UB','Ultra T-Bond',31.25,'1/32 pt','Interest rates'],
-['ZC','Corn',12.5,'0.25 ¢','Grains'],['ZS','Soybeans',12.5,'0.25 ¢','Grains'],['ZW','Chicago Wheat',12.5,'0.25 ¢','Grains'],
-['ZM','Soybean Meal',10,'0.10','Grains'],['ZL','Soybean Oil',6,'0.01 ¢','Grains'],
-['6E','Euro FX',6.25,'0.00005','Currencies'],['M6E','Micro EUR/USD',1.25,'0.0001','Currencies'],['6B','British Pound',6.25,'0.0001','Currencies'],
-['6J','Japanese Yen',6.25,'0.0000005','Currencies'],['6A','Australian Dollar',10,'0.0001','Currencies'],
-['6C','Canadian Dollar',5,'0.00005','Currencies'],['6S','Swiss Franc',12.5,'0.0001','Currencies'],
-['LE','Live Cattle',10,'0.025','Livestock'],['GF','Feeder Cattle',12.5,'0.025','Livestock'],['HE','Lean Hogs',10,'0.025','Livestock'],
-['BTC','Bitcoin',25,'5 pt','Crypto'],['MBT','Micro Bitcoin',0.5,'5 pt','Crypto'],['ETH','Ether',25,'0.50 pt','Crypto'],['MET','Micro Ether',0.05,'0.50 pt','Crypto']
-];
-let custom=[];
-try{custom=JSON.parse(localStorage.getItem('cg_custom')||'[]')}catch(e){custom=[]}
-function saveCustom(){try{localStorage.setItem('cg_custom',JSON.stringify(custom))}catch(e){}}
-function allC(){return BASE.concat(custom.map(c=>[c.sym,c.name,c.tv,'','My contracts']));}
-const money=v=>'$'+v.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:4});
-const num1=v=>v.toLocaleString(undefined,{maximumFractionDigits:1});
-function pill(p){const c=p<1?'ok':p<=2.5?'mid':'hard';return '<span class="pill '+c+'">'+p.toFixed(2)+'%</span>';}
-function esc(s){return String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));}
-
-function buildSelect(){
-  const sel=$('fsel'),keep=sel.value||'MGC',groups={};
-  allC().forEach(c=>{(groups[c[4]]=groups[c[4]]||[]).push(c);});
-  sel.innerHTML=Object.keys(groups).map(g=>'<optgroup label="'+esc(g)+'">'+groups[g].map(c=>'<option value="'+esc(c[0])+'">'+esc(c[0])+' – '+esc(c[1])+' · '+money(c[2])+'/tick</option>').join('')+'</optgroup>').join('');
-  sel.value=allC().some(c=>c[0]===keep)?keep:'MGC';
-  $('clist').innerHTML=custom.map((c,i)=>'<div class="cl"><span>'+esc(c.sym)+' – '+esc(c.name)+' · '+money(c.tv)+'/tick</span><button class="x" data-i="'+i+'" aria-label="Remove">✕</button></div>').join('');
-}
-function weeksList(c){const l=WEEKS.slice();if(c>0&&!l.includes(c)){l.push(c);l.sort((a,b)=>a-b);}return l;}
-function calc(ratio,days,simple){return simple?(ratio-1)*100/days:(Math.pow(ratio,1/days)-1)*100;}
-
-function render(){
-  const s=parseFloat($('start').value),t=parseFloat($('target').value),d=parseInt($('dpw').value,10),c=parseInt($('custom').value,10);
-  const sum=$('sum'),r1=$('rows1'),r2=$('rows2');
-  if(!(s>0)||!(t>0)||!(d>0)){r1.innerHTML=r2.innerHTML='';sum.textContent='Enter a start balance, target and trading days.';return;}
-  const ratio=t/s;
-  sum.innerHTML='<div>Total gain needed<b>'+((ratio-1)*100).toFixed(1)+'%</b></div><div>Dollar gain<b>$'+(t-s).toFixed(2)+'</b></div><div>Growth multiple<b>'+ratio.toFixed(3)+'x</b></div>';
-  if(ratio<=1){r1.innerHTML=r2.innerHTML='<tr><td colspan="5">Target is at or below your starting balance.</td></tr>';return;}
-  const list=weeksList(c),m1=false,m2=false;
-  const sel=allC().find(x=>x[0]===$('fsel').value)||BASE[9],n=parseInt($('fn').value,10)||1,tv=sel[2];
-  $('finfo').innerHTML='<b>'+esc(sel[0])+'</b> – '+esc(sel[1])+(sel[3]?' · tick size '+esc(sel[3]):'')+' · <b>'+money(tv)+'</b> per tick per contract';
-  r1.innerHTML=list.map(w=>{
-    const days=w*d,rt=Math.pow(ratio,1/days)-1,g1=s*rt,gl=t*rt/(1+rt),wk=(Math.pow(ratio,1/w)-1)*100;
-    return '<tr'+(w===c?' style="background:var(--okbg)"':'')+'><td>'+w+'</td><td>'+days+'</td><td>'+pill(calc(ratio,days,m1))+'</td><td>$'+g1.toFixed(2)+'</td><td>$'+gl.toFixed(2)+'</td><td>'+wk.toFixed(1)+'%</td></tr>';
-  }).join('');
-  r2.innerHTML=list.map(w=>{
-    const days=w*d,rt=Math.pow(ratio,1/days)-1,g1=s*rt,gl=t*rt/(1+rt),cell=g=>'$'+g.toFixed(2)+'<br><span class="note">'+num1(g/(n*tv))+' ticks</span>';
-    return '<tr'+(w===c?' style="background:var(--okbg)"':'')+'><td>'+w+'</td><td>'+days+'</td><td>'+pill(calc(ratio,days,m2))+'</td><td>'+cell(g1)+'</td><td>'+cell(gl)+'</td></tr>';
-  }).join('');
-}
-['start','target','dpw','custom','fsel','fn'].forEach(id=>$(id).addEventListener('input',render));
-
-function tab(n){
-  [1,2].forEach(i=>{$('t'+i).setAttribute('aria-selected',i===n);$('p'+i).hidden=i!==n;});
-}
-$('t1').onclick=()=>tab(1);$('t2').onclick=()=>tab(2);
-
-$('cadd').onclick=()=>{
-  const sym=$('csym').value.trim().toUpperCase(),name=$('cname').value.trim()||sym,tv=parseFloat($('ctv').value),msg=$('cmsg');
-  if(!sym||!(tv>0)){msg.textContent='Enter a ticker and a tick value.';return;}
-  if(BASE.some(c=>c[0]===sym)){msg.textContent=sym+' is already in the list.';return;}
-  custom=custom.filter(c=>c.sym!==sym);custom.push({sym,name,tv});saveCustom();
-  buildSelect();$('fsel').value=sym;$('csym').value=$('cname').value=$('ctv').value='';msg.textContent='Added '+sym+'.';render();
-};
-$('clist').onclick=e=>{
-  const b=e.target.closest('button[data-i]');if(!b)return;
-  custom.splice(+b.dataset.i,1);saveCustom();buildSelect();render();
-};
-buildSelect();$('fsel').value='MGC';render();
 </script>
 </main>
 </body>
