@@ -1,7 +1,7 @@
 # Compound-Growth-Planner
 A single-file web tool that shows the daily percentage gain needed to grow an account from a starting balance to a target balance over a set number of weeks, using compound growth.
 
-##Features
+## Features
 - Enter a starting balance, target balance, and trading days per week
 - Table of the daily % and weekly % needed for timelines from 2 to 52 weeks, plus a custom weeks option
 - Dollar gain needed on the first and last trading day of each timeline
@@ -10,10 +10,10 @@ A single-file web tool that shows the daily percentage gain needed to grow an ac
 - Add your own contracts to the futures list (saved in the browser)
 - Light and dark mode, built for mobile
 
-##Formula
+## Formula
 - Daily % = (Target ÷ Start)^(1 ÷ Trading days) − 1
 
-##Notes
+## Notes
 - Assumes every trading day is a winner and ignores fees and taxes
 - Tick values are standard CME specs; verify on cmegroup.com before trading
 - For planning purposes only, not financial advice
