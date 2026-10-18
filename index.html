@@ -47,9 +47,9 @@ summary{cursor:pointer;font-weight:600}
 <p class="sub">Daily % needed to reach a target balance over a set number of weeks.</p>
 
 <div class="card"><div class="grid">
-<div><label for="start">Starting balance ($)</label><input id="start" type="number" inputmode="decimal" step="0.01" placeholder="e.g. $250"></div>
-<div><label for="target">Target balance ($)</label><input id="target" type="number" inputmode="decimal" step="0.01" placeholder="e.g. $950"></div>
-<div><label for="dpw">Trading days per week</label><input id="dpw" type="number" inputmode="numeric" min="1" max="7" placeholder="e.g. 4"></div>
+<div><label for="start">Starting balance ($)</label><input id="start" type="number" inputmode="decimal" step="0.01" value="367.19"></div>
+<div><label for="target">Target balance ($)</label><input id="target" type="number" inputmode="decimal" step="0.01" value="967"></div>
+<div><label for="dpw">Trading days per week</label><input id="dpw" type="number" inputmode="numeric" min="1" max="7" value="3"></div>
 <div><label for="custom">Custom weeks (optional)</label><input id="custom" type="number" inputmode="numeric" min="1" placeholder="e.g. 10"></div>
 </div></div>
 
@@ -99,15 +99,15 @@ summary{cursor:pointer;font-weight:600}
 <section id='p3' role='tabpanel' hidden>
 <div class='card'>
 <div class='grid'>
-<div><label for='wprice'>Item price ($)</label><input id='wprice' type='number' inputmode='decimal' step='0.01'placeholder="e.g. $950"></div>
+<div><label for='wprice'>Item price ($, optional)</label><input id='wprice' placeholder='Leave blank' type='number' inputmode='decimal' step='0.01' value='250'></div>
 <div><label for='wpct'>Withdraw % of profit</label><input id='wpct' type='number' inputmode='decimal' min='1' max='100' value='50'></div>
 <div class='full'><label for='wdaily'>Average daily % gain</label><input id='wdaily' type='number' inputmode='decimal' step='0.1' value='1'></div>
 </div>
 <p class='info' id='wsum'></p>
-<p class='note'>Uses your starting balance and trading days per week from above. Your starting balance is the baseline you keep trading with.</p>
+<p class='note'>Uses your starting balance and trading days per week from above. Your starting balance is the baseline you keep trading with. Leave the item price blank to just see how much to withdraw each week over 52 weeks.</p>
 </div>
 <div class='card'>
-<div class='tw'><table><thead><tr><th>Withdraw %</th><th>Weeks</th><th>Account at end</th></tr></thead><tbody id='rows4'></tbody></table></div>
+<div class='tw'><table><thead><tr><th>Withdraw %</th><th>Weeks</th><th>Account at end</th><th>Saved</th></tr></thead><tbody id='rows4'></tbody></table></div>
 <p class='note'>A higher withdrawal % funds the item sooner but leaves the account smaller.</p>
 </div>
 <div class='card'>
@@ -182,14 +182,14 @@ function render(){
 ['start','target','dpw','custom','fsel','fn'].forEach(id=>$(id).addEventListener('input',render));
 
 const m2=v=>'$'+v.toFixed(2);
-function sim(s,d,dr,pct,price){let b=s,saved=0;const rows=[],g=Math.pow(1+dr,d);for(let w=1;w<=520&&saved<price-0.005;w++){const before=b*g;let wd=Math.max(0,before-s)*pct;if(saved+wd>price)wd=price-saved;b=before-wd;saved+=wd;rows.push([w,before,wd,saved,b]);}return{rows,b,done:saved>=price-0.005};}
+function sim(s,d,dr,pct,price,cap=520){let b=s,saved=0;const rows=[],g=Math.pow(1+dr,d);for(let w=1;w<=cap&&saved<price-0.005;w++){const before=b*g;let wd=Math.max(0,before-s)*pct;if(saved+wd>price)wd=price-saved;b=before-wd;saved+=wd;rows.push([w,before,wd,saved,b]);}return{rows,b,done:saved>=price-0.005};}
 function renderW(){
-const s=parseFloat($('start').value),d=parseInt($('dpw').value,10),price=parseFloat($('wprice').value),pct=parseFloat($('wpct').value)/100,dr=parseFloat($('wdaily').value)/100,ws=$('wsum'),r3=$('rows3'),r4=$('rows4');
-if(!(s>0)||!(d>0)||!(price>0)||!(pct>0&&pct<=1)||!(dr>-1)){ws.textContent='Enter a start balance, trading days, item price, withdraw % (1–100) and daily % gain.';r3.innerHTML=r4.innerHTML='';return;}
-const res=sim(s,d,dr,pct,price),n=res.rows.length;
-ws.innerHTML=res.done?`Item funded in <b>${n} weeks</b> (${n*d} trading days). Account ends at <b>${m2(res.b)}</b>.`:'At this pace the item is not funded within 10 years. Try a higher daily % gain.';
+const s=parseFloat($('start').value),d=parseInt($('dpw').value,10),pr=parseFloat($('wprice').value),price=pr>0?pr:Infinity,pct=parseFloat($('wpct').value)/100,dr=parseFloat($('wdaily').value)/100,ws=$('wsum'),r3=$('rows3'),r4=$('rows4');
+if(!(s>0)||!(d>0)||!(pct>0&&pct<=1)||!(dr>-1)){ws.textContent='Enter a start balance, trading days, withdraw % (1–100) and daily % gain.';r3.innerHTML=r4.innerHTML='';return;}
+const cap=price===Infinity?52:520,res=sim(s,d,dr,pct,price,cap),n=res.rows.length,tot=n?res.rows[n-1][3]:0;
+ws.innerHTML=price===Infinity?`Over 52 weeks you would withdraw <b>${m2(tot)}</b>, starting with <b>${m2(res.rows[0][2])}</b> in week 1. Account ends at <b>${m2(res.b)}</b>.`:res.done?`Item funded in <b>${n} weeks</b> (${n*d} trading days). Account ends at <b>${m2(res.b)}</b>.`:'At this pace the item is not funded within 10 years. Try a higher daily % gain.';
 r3.innerHTML=res.rows.slice(0,52).map(r=>`<tr><td>${r[0]}</td><td>${m2(r[1])}</td><td>${m2(r[2])}</td><td>${m2(r[3])}</td><td>${m2(r[4])}</td></tr>`).join('');
-r4.innerHTML=[25,50,75,100].map(p=>{const x=sim(s,d,dr,p/100,price);return `<tr><td>${p}%</td><td>${x.done?x.rows.length:'—'}</td><td>${x.done?m2(x.b):'—'}</td></tr>`;}).join('');
+r4.innerHTML=[25,50,75,100].map(p=>{const x=sim(s,d,dr,p/100,price,cap),L=x.rows.length,sv=L?x.rows[L-1][3]:0,ok=x.done||price===Infinity;return `<tr><td>${p}%</td><td>${ok?L:'—'}</td><td>${ok?m2(x.b):'—'}</td><td>${ok?m2(sv):'—'}</td></tr>`;}).join('');
 }
 ['start','dpw','wprice','wpct','wdaily'].forEach(id=>$(id).addEventListener('input',renderW));
 function tab(n){
